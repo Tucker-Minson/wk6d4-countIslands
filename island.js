@@ -46,10 +46,10 @@ function countIslands(matrix) {
 
       if (matrix[row][col] === 1 && !visited.has([row, col].toString())) {
         count ++;
-        //let neigbors = getNeighbors(row, col, matrix);
         let currIdx = [row, col];
         let stack = [currIdx];
         visited.add(currIdx.toString())
+
         while (stack.length) {
           let currNode = stack.pop();
           let nbhrs = getNeighbors(currNode[0], currNode[1], matrix);
@@ -66,7 +66,7 @@ function countIslands(matrix) {
   }
   return count
     // If an index contains a 1 and has not been visited,
-    // increment island count and start traversing neighbors
+    // increment island count
       // DO THE THING (increment island count by 1)
       // Initialize a stack with current index
       // Add stringified version of current index to the visited set
