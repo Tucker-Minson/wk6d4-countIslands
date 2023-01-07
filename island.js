@@ -37,10 +37,34 @@ function getNeighbors(row, col, matrix) {
 }
 
 function countIslands(matrix) {
-
-  // Create a visited set to store visited nodes
+  let visited = new Set();
   // Initialize count to 0
+  let count = 0;
   // Iterate through all indices in matrix
+  for (let row = 0; row < matrix.length; row ++) {
+    for (let col = 0; col < matrix[row].length; col ++) {
+
+      if (matrix[row][col] === 1 && !visited.has([row, col].toString())) {
+        count ++;
+        //let neigbors = getNeighbors(row, col, matrix);
+        let currIdx = [row, col];
+        let stack = [currIdx];
+        visited.add(currIdx.toString())
+        while (stack.length) {
+          let currNode = stack.pop();
+          let nbhrs = getNeighbors(currNode[0], currNode[1], matrix);
+
+          nbhrs.forEach(nbhr => {
+            if (!visited.has(nbhr.toString())) {
+              stack.push(nbhr);
+              visited.add(nbhr.toString());
+            }
+          })
+        }
+      }
+    }
+  }
+  return count
     // If an index contains a 1 and has not been visited,
     // increment island count and start traversing neighbors
       // DO THE THING (increment island count by 1)
